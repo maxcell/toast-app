@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { NotificationProvider, useNotifications } from "./notification-context";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NotificationProvider>
+      <InfoToastButton text="Worked!" location="BOTTOM_LEFT">
+        Bottom Left
+      </InfoToastButton>
+      <SuccessToastButton text="Success" location="BOTTOM_CENTER">
+        Bottom Center
+      </SuccessToastButton>
+
+      <ErrorToastButton text="Worked!" location="BOTTOM_RIGHT">
+        Bottom Right
+      </ErrorToastButton>
+    </NotificationProvider>
   );
+}
+
+function ToastButton(props) {
+  const { children, text, location, status } = props;
+  const { add } = useNotifications();
+  return (
+    <button onClick={() => add(text, status, location)}>{children}</button>
+  );
+}
+
+/* Specializations of ToastButtons */
+function SuccessToastButton(props) {
+  return <ToastButton status="success" {...props} />;
+}
+
+function WarningToastButton(props) {
+  return <ToastButton status="warning" {...props} />;
+}
+
+function ErrorToastButton(props) {
+  return <ToastButton status="error" {...props} />;
+}
+
+function InfoToastButton(props) {
+  return <ToastButton status="info" {...props} />;
 }
 
 export default App;
