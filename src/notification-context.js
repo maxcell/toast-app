@@ -2,12 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Alert } from "@material-ui/lab";
 
-// Create our context for notifications
-const NotificationContext = React.createContext();
-
-// Location on the dom where we want to put all of our notifications
-const NotificationContainer = props => <div {...props} />;
-
 /**
  * Returns the notification onto the page. Takes in props:
  * text - text that is displayed for the user
@@ -63,6 +57,12 @@ const Notification = ({ text, status, location }) => {
     </Snackbar>
   );
 };
+
+// Create our context for notifications
+const NotificationContext = React.createContext();
+
+// Location on the dom where we want to put all of our notifications
+const NotificationContainer = props => <div {...props} />;
 
 export function NotificationProvider({ children }) {
   const initialState = {
