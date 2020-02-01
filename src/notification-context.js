@@ -2,45 +2,44 @@ import React, { useState, useEffect, useContext } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Alert } from "@material-ui/lab";
 
+const anchorObjs = {
+  TOP_LEFT: {
+    horizontal: "left",
+    vertical: "top"
+  },
+  TOP_CENTER: {
+    horizontal: "center",
+    vertical: "top"
+  },
+  TOP_RIGHT: {
+    horizontal: "right",
+    vertical: "top"
+  },
+  BOTTOM_LEFT: {
+    horizontal: "left",
+    vertical: "bottom"
+  },
+  BOTTOM_CENTER: {
+    horizontal: "center",
+    vertical: "bottom"
+  },
+  BOTTOM_RIGHT: {
+    horizontal: "right",
+    vertical: "bottom"
+  }
+};
+
 /**
- * Returns the notification onto the page. Takes in props:
- * text - text that is displayed for the user
- * status - what styles it should take on as well as handles aria-labels
- *           * Limited to: 'success', 'error', 'warning', 'info'
- * location - where it should be rendered onto the page.
- *           * Limited to: 'TOP_LEFT', 'TOP_CENTER', 'TOP_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_CENTER', 'BOTTOM_RIGHT'
+ * Returns the notification onto the page.
+ * @param props
+ * @param props.text {string} - text that is displayed for the user
+ * @param props.status {'success' | 'error' | 'warning' | 'info} - what styles it should take on as well as handles aria-labels
+ * @param props.location {'TOP_LEFT' |'TOP_CENTER' | 'TOP_RIGHT' | 'BOTTOM_LEFT' | 'BOTTOM_CENTER' | 'BOTTOM_RIGHT'} - where it should be rendered onto the page.
  */
 const Notification = ({ text, status, location }) => {
   const [open, setOpen] = useState(true);
 
   function anchorOrigin(anchor_string) {
-    const anchorObjs = {
-      TOP_LEFT: {
-        horizontal: "left",
-        vertical: "top"
-      },
-      TOP_CENTER: {
-        horizontal: "center",
-        vertical: "top"
-      },
-      TOP_RIGHT: {
-        horizontal: "right",
-        vertical: "top"
-      },
-      BOTTOM_LEFT: {
-        horizontal: "left",
-        vertical: "bottom"
-      },
-      BOTTOM_CENTER: {
-        horizontal: "center",
-        vertical: "bottom"
-      },
-      BOTTOM_RIGHT: {
-        horizontal: "right",
-        vertical: "bottom"
-      }
-    };
-
     return anchorObjs[anchor_string] || anchorObjs["BOTTOM_CENTER"];
   }
 
